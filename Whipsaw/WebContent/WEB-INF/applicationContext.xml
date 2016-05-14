@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:amq="http://activemq.apache.org/schema/core"
+       xmlns:jms="http://www.springframework.org/schema/jms"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/task
+       http://www.springframework.org/schema/task/spring-task.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://activemq.apache.org/schema/core
+       http://activemq.apache.org/schema/core/activemq-core.xsd
+       http://www.springframework.org/schema/jms
+       http://www.springframework.org/schema/jms/spring-jms.xsd">
+
+    <context:component-scan base-package="whipsaw.server" />
+
+    <!--AZURE<bean id="dataSource"
+          class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://eu-cdbr-azure-west-d.cloudapp.net:3306/acsm_98b6249511317e1" />
+        <property name="username" value="b707c01425d50f" />
+        <property name="password" value="d84208b2" />
+    </bean>-->
+
+    <bean id="dataSource"
+          class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/whipsawDb" />
+        <property name="username" value="root" />
+        <property name="password" value="" />
+    </bean>
+
+
+    <bean id="entityManagerFactory"
+          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="persistenceUnitName" value="whipsaw" />
+        <property name="persistenceProvider">
+            <bean class="org.hibernate.jpa.HibernatePersistenceProvider" />
+        </property>
+    </bean>
+
+    <bean id="transactionManager"
+          class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
+
+    <amq:connectionFactory id="amqConnectionFactory" brokerURL="tcp://whipsaw.cloudapp.net:80" />
+
+    <bean id="connectionFactory"
+          class="org.springframework.jms.connection.CachingConnectionFactory">
+        <constructor-arg ref="amqConnectionFactory" />
+        <property name="sessionCacheSize" value="100" />
+
+    </bean>
+
+    <bean id="statusUpdateJmsTemplate" autowire="byName"
+          class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="connectionFactory" />
+    </bean>
+
+    <bean id="loggingQueue"
+          class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg index="0" value="loggingQueue" />
+    </bean>
+
+    <bean id="loggingJmsTemplate" autowire="byName"
+          class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="connectionFactory" />
+        <property name="defaultDestination" ref="loggingQueue" />
+    </bean>
+
+    <bean id="jacksonObjectMapper"
+          class="com.fasterxml.jackson.databind.ObjectMapper" />
+
+    <jms:listener-container connection-factory="connectionFactory" destination-type="queue">
+        <jms:listener destination="loggingQueue" ref="logReceiver" />
+    </jms:listener-container>
+
+    <task:annotation-driven />
+
+    <aop:aspectj-autoproxy />
+
+    <tx:annotation-driven />
+
+</beans>
