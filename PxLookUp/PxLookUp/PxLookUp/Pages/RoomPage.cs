@@ -28,7 +28,7 @@ namespace PxLookUp.Pages
                     break;
             }
 
-            this.Children.Add(new DayPage(list)
+            this.Children.Add(new DayPage(new ContentService().FilterByDay(list, "fff"))
             {
                 Title = "Monday"
             });
@@ -54,59 +54,92 @@ namespace PxLookUp.Pages
         {
             public DayPage(List<Course> list)
             {
-                // This binding is necessary to label the tabs in
-                // the TabbedPage.
                 this.SetBinding(ContentPage.TitleProperty, "Name");
-                // BoxView to show the color.
+
+                Label hourLabel;
+                Label roomLabel;
+                Label groupLabel;
+                Label lectureLabel;
+                Label teacherLabel;
+
+                Grid g = new Grid
+                {
+                    VerticalOptions = LayoutOptions.FillAndExpand,
+                    RowDefinitions =
+                {
+                    new RowDefinition { Height = GridLength.Auto },
+                    new RowDefinition { Height = GridLength.Auto },
+                    new RowDefinition { Height = GridLength.Auto }
+                },
+                    ColumnDefinitions =
+                {
+                    new ColumnDefinition { Width = GridLength.Auto },
+                    new ColumnDefinition { Width = GridLength.Auto },
+                    new ColumnDefinition { Width = GridLength.Auto }
+                }
+                };
+
+                g.Children.Add(hourLabel = new Label
+                {
+                    FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
+                    HorizontalOptions = LayoutOptions.Center
+                },0,1,0,1);
+
+                g.Children.Add(roomLabel = new Label
+                {
+                    FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
+                    HorizontalOptions = LayoutOptions.Center
+                },0,1,1,2);
+
+                g.Children.Add(groupLabel = new Label
+                {
+                    FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
+                    HorizontalOptions = LayoutOptions.Center
+                },2,3,0,1);
+
+                g.Children.Add(lectureLabel = new Label
+                {
+                    FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
+                    HorizontalOptions = LayoutOptions.Center
+                },2,3,1,2);
+
+                g.Children.Add(teacherLabel = new Label
+                {
+                    FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
+                    HorizontalOptions = LayoutOptions.Center
+                },2,3,2,3);
 
                 ListView listView = new ListView
                 {                
                     HorizontalOptions = LayoutOptions.Center,
                     VerticalOptions = LayoutOptions.Center,
+                    RowHeight = 100,
 
                     ItemsSource = list,
                     
                     ItemTemplate = new DataTemplate(() =>
-                    {
-                        Label hourLabel = new Label();
-                        hourLabel.SetBinding(Label.TextProperty, "van_uur");
-
-                        Label roomLabel = new Label();
-                        roomLabel.SetBinding(Label.TextProperty, "lokaal");
-
-                        Label groupLabel = new Label();
-                        groupLabel.SetBinding(Label.TextProperty, "klas");
-
-                        Label lectureLabel = new Label();
-                        lectureLabel.SetBinding(Label.TextProperty, "olod");
-
-                        Label teacherLabel = new Label();
+                    {                
+                        hourLabel.SetBinding(Label.TextProperty, "van_uur");               
+                        roomLabel.SetBinding(Label.TextProperty, "lokaal");                        
+                        groupLabel.SetBinding(Label.TextProperty, "klas");                       
+                        lectureLabel.SetBinding(Label.TextProperty, "olod");                       
                         teacherLabel.SetBinding(Label.TextProperty, "docent");
 
                         return new ViewCell
                         {
                             View = new StackLayout
                             {
-                                Padding = new Thickness(0, 5),
+                                Padding = new Thickness(20, 5),
                                 Orientation = StackOrientation.Horizontal,
                                 Children =
                                 {
-                                    new StackLayout
-                                    {
-                                        VerticalOptions = LayoutOptions.Center,
-                                        Spacing = 0,
-                                        Children =
-                                        {
-                                            hourLabel, roomLabel, groupLabel, lectureLabel, teacherLabel
-                                        }
-                                    }
+                                    g                                                                  
                                 }
                             }
                         };
                     })
                 };
 
-                // Build the page
                 this.Content = listView;
             }
         }

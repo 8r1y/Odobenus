@@ -39,7 +39,6 @@
     <Compile Include="ContentService.cs" />
     <Compile Include="Course.cs" />
     <Compile Include="ISQLite.cs" />
-    <Compile Include="PageControl.cs" />
     <Compile Include="Pages\IntroPage.cs" />
     <Compile Include="Pages\RoomPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
