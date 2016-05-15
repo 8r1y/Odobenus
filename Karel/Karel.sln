@@ -16,6 +16,10 @@ EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Karel\Karel\Karel.projitems*{bdd40bfb-989c-4a0b-be45-aa036ae09679}*SharedItemsImports = 13
+		Karel\Karel\Karel.projitems*{ac50f12d-e501-4c96-b7c4-b4dbedcb1dbb}*SharedItemsImports = 4
+		Karel\Karel\Karel.projitems*{e426e95b-1f19-4ac0-a0a8-e442ffaca5cf}*SharedItemsImports = 4
+		Karel\Karel\Karel.projitems*{b0f63e0e-7bc9-4479-8447-ee7ec619b0ce}*SharedItemsImports = 4
+		Karel\Karel\Karel.projitems*{1a6454d3-dc14-46c8-ab81-b48ab4304800}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
