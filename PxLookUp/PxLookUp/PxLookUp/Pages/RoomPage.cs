@@ -21,30 +21,30 @@ namespace PxLookUp.Pages
                     list = db.GetCourseByRoom(value);
                     break;
                 case "By Group":
-                    list = db.GetCourseByRoom(value);
+                    list = db.GetCourseByGroup(value);
                     break;
                 case "By Teacher":
-                    list = db.GetCourseByRoom(value);
+                    list = db.GetCourseByTeacher(value);
                     break;
             }
 
-            this.Children.Add(new DayPage(new ContentService().FilterByDay(list, "fff"))
+            this.Children.Add(new DayPage(new ContentService().FilterByDay(list, "Monday"))
             {
                 Title = "Monday"
             });
-            this.Children.Add(new DayPage(list)
+            this.Children.Add(new DayPage(new ContentService().FilterByDay(list, "Tuesday"))
             {
                 Title = "Tuesday"
             });
-            this.Children.Add(new DayPage(list)
+            this.Children.Add(new DayPage(new ContentService().FilterByDay(list, "Wednesday"))
             {
                 Title = "Wednesday"
             });
-            this.Children.Add(new DayPage(list)
+            this.Children.Add(new DayPage(new ContentService().FilterByDay(list, "Thursday"))
             {
                 Title = "Thursday"
             });
-            this.Children.Add(new DayPage(list)
+            this.Children.Add(new DayPage(new ContentService().FilterByDay(list, "Friday"))
             {
                 Title = "Friday"
             });
@@ -56,90 +56,104 @@ namespace PxLookUp.Pages
             {
                 this.SetBinding(ContentPage.TitleProperty, "Name");
 
-                Label hourLabel;
+                Label hourSLabel;
+                Label hourELabel;
                 Label roomLabel;
                 Label groupLabel;
                 Label lectureLabel;
                 Label teacherLabel;
 
-                Grid g = new Grid
-                {
-                    VerticalOptions = LayoutOptions.FillAndExpand,
-                    RowDefinitions =
-                {
-                    new RowDefinition { Height = GridLength.Auto },
-                    new RowDefinition { Height = GridLength.Auto },
-                    new RowDefinition { Height = GridLength.Auto }
-                },
-                    ColumnDefinitions =
-                {
-                    new ColumnDefinition { Width = GridLength.Auto },
-                    new ColumnDefinition { Width = GridLength.Auto },
-                    new ColumnDefinition { Width = GridLength.Auto }
-                }
-                };
-
-                g.Children.Add(hourLabel = new Label
-                {
-                    FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
-                    HorizontalOptions = LayoutOptions.Center
-                },0,1,0,1);
-
-                g.Children.Add(roomLabel = new Label
-                {
-                    FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
-                    HorizontalOptions = LayoutOptions.Center
-                },0,1,1,2);
-
-                g.Children.Add(groupLabel = new Label
-                {
-                    FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
-                    HorizontalOptions = LayoutOptions.Center
-                },2,3,0,1);
-
-                g.Children.Add(lectureLabel = new Label
-                {
-                    FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
-                    HorizontalOptions = LayoutOptions.Center
-                },2,3,1,2);
-
-                g.Children.Add(teacherLabel = new Label
-                {
-                    FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
-                    HorizontalOptions = LayoutOptions.Center
-                },2,3,2,3);
-
                 ListView listView = new ListView
-                {                
+                {
                     HorizontalOptions = LayoutOptions.Center,
                     VerticalOptions = LayoutOptions.Center,
-                    RowHeight = 100,
+                    RowHeight = 150,
 
                     ItemsSource = list,
-                    
+
                     ItemTemplate = new DataTemplate(() =>
-                    {                
-                        hourLabel.SetBinding(Label.TextProperty, "van_uur");               
-                        roomLabel.SetBinding(Label.TextProperty, "lokaal");                        
-                        groupLabel.SetBinding(Label.TextProperty, "klas");                       
-                        lectureLabel.SetBinding(Label.TextProperty, "olod");                       
+                    {
+                        hourSLabel = new Label
+                        {
+                            FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
+                            HorizontalOptions = LayoutOptions.Center,
+                            LineBreakMode = LineBreakMode.NoWrap
+                        };
+                        hourELabel = new Label
+                        {
+                            FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
+                            HorizontalOptions = LayoutOptions.Center,
+                            LineBreakMode = LineBreakMode.NoWrap
+                        };
+                        roomLabel = new Label
+                        {
+                            FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
+                            HorizontalOptions = LayoutOptions.Center,
+                            LineBreakMode = LineBreakMode.NoWrap
+                        };
+                        groupLabel = new Label
+                        {
+                            FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
+                            HorizontalOptions = LayoutOptions.Center,
+                            VerticalTextAlignment = TextAlignment.Center
+                        };
+                        lectureLabel = new Label
+                        {
+                            FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
+                            HorizontalOptions = LayoutOptions.Center,
+                            VerticalTextAlignment = TextAlignment.Center
+                        };
+                        teacherLabel = new Label
+                        {
+                            FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
+                            HorizontalOptions = LayoutOptions.Center,
+                            VerticalTextAlignment = TextAlignment.Center
+                        };
+
+                        hourSLabel.SetBinding(Label.TextProperty, "van_uur");
+                        hourELabel.SetBinding(Label.TextProperty, "tot_uur");
+                        roomLabel.SetBinding(Label.TextProperty, "lokaal");
+                        groupLabel.SetBinding(Label.TextProperty, "klas");
+                        lectureLabel.SetBinding(Label.TextProperty, "olod");
                         teacherLabel.SetBinding(Label.TextProperty, "docent");
 
                         return new ViewCell
                         {
                             View = new StackLayout
                             {
-                                Padding = new Thickness(20, 5),
                                 Orientation = StackOrientation.Horizontal,
+                                HorizontalOptions = LayoutOptions.FillAndExpand,                     
+
                                 Children =
                                 {
-                                    g                                                                  
+                                    new StackLayout
+                                    {
+                                        Orientation = StackOrientation.Vertical,
+                                        HorizontalOptions = LayoutOptions.StartAndExpand,
+                                        MinimumWidthRequest = 50,
+
+                                        Children =
+                                        {
+                                            roomLabel, hourSLabel, hourELabel
+                                        }
+                                    },
+
+                                    new StackLayout
+                                    {
+                                        Orientation = StackOrientation.Vertical,
+                                        HorizontalOptions = LayoutOptions.CenterAndExpand,
+                                        VerticalOptions = LayoutOptions.Center,
+
+                                        Children =
+                                        {
+                                            groupLabel, lectureLabel, teacherLabel
+                                        }
+                                    }
                                 }
                             }
                         };
                     })
                 };
-
                 this.Content = listView;
             }
         }

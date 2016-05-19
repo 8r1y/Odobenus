@@ -20,7 +20,3 @@ C:\Users\jjack\OneDrive\Documenten\GitHub\Odobenus\PxLookUp\PxLookUp\PxLookUp\bi
 C:\Users\jjack\OneDrive\Documenten\GitHub\Odobenus\PxLookUp\PxLookUp\PxLookUp\obj\Debug\PxLookUp.csprojResolveAssemblyReference.cache
 C:\Users\jjack\OneDrive\Documenten\GitHub\Odobenus\PxLookUp\PxLookUp\PxLookUp\obj\Debug\PxLookUp.dll.mdb
 C:\Users\jjack\OneDrive\Documenten\GitHub\Odobenus\PxLookUp\PxLookUp\PxLookUp\bin\Debug\PxLookUp.dll.mdb
-C:\Users\jjack\OneDrive\Documenten\GitHub\Odobenus\PxLookUp\PxLookUp\PxLookUp\obj\Debug\PxLookUp.dll.mdb
-C:\Users\jjack\OneDrive\Documenten\GitHub\Odobenus\PxLookUp\PxLookUp\PxLookUp\bin\Debug\PxLookUp.dll.mdb
-C:\Users\jjack\OneDrive\Documenten\GitHub\Odobenus\PxLookUp\PxLookUp\PxLookUp\obj\Debug\PxLookUp.dll.mdb
-C:\Users\jjack\OneDrive\Documenten\GitHub\Odobenus\PxLookUp\PxLookUp\PxLookUp\bin\Debug\PxLookUp.dll.mdb

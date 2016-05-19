@@ -108,8 +108,6 @@ namespace PxLookUp.Pages
                 l.Children.Add(optionPicker);
                 l.Children.Add(filterPicker);
 
-                
-
                 this.Content = l;
             }
         }

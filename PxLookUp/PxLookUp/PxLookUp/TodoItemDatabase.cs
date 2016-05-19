@@ -27,13 +27,13 @@ namespace PxLookUp
         {
             return database.Query<Course>("SELECT * FROM Course WHERE lokaal = '" + room + "'"); 
         }
-        public Course GetCourseByGroup(string group)
+        public List<Course> GetCourseByGroup(string group)
         {
-            return database.Table<Course>().FirstOrDefault(x => x.klas == group);
+            return database.Query<Course>("SELECT * FROM Course WHERE klas = '" + group + "'");
         }
-        public Course GetCourseByTeacher(string teacher)
+        public List<Course> GetCourseByTeacher(string teacher)
         {
-            return database.Table<Course>().FirstOrDefault(x => x.docent == teacher);
+            return database.Query<Course>("SELECT * FROM Course WHERE docent = '" + teacher + "'");
         }
         public void InsertCourses(List<Course> courses)
         {
