@@ -1,11 +1,11 @@
 <XamlCompilerSaveState>
   <ReferenceAssemblyList>
     <LocalAssembly PathName="c:\users\jjack\onedrive\documenten\github\odobenus\pxlookup\pxlookup\pxlookup.winphone\obj\debug\intermediatexaml\pxlookup.winphone.exe" HashGuid="b7fc1b52-d71e-b621-e351-eac87a23f90d" />
-    <ReferenceAssembly PathName="c:\users\jjack\onedrive\documenten\github\odobenus\pxlookup\pxlookup\pxlookup\bin\debug\pxlookup.dll" HashGuid="5c4b1e5e-dcac-d074-e120-61be012bb1a5" />
-    <ReferenceAssembly PathName="c:\users\jjack\onedrive\documenten\github\odobenus\pxlookup\packages\xamarin.forms.2.0.0.6482\lib\wpa81\xamarin.forms.core.dll" HashGuid="c8a30eb8-5ae8-352d-b94f-7c913a7557ba" />
-    <ReferenceAssembly PathName="c:\users\jjack\onedrive\documenten\github\odobenus\pxlookup\packages\xamarin.forms.2.0.0.6482\lib\wpa81\xamarin.forms.platform.dll" HashGuid="d9389e38-8a39-bed5-406b-7a34fe4704ea" />
-    <ReferenceAssembly PathName="c:\users\jjack\onedrive\documenten\github\odobenus\pxlookup\packages\xamarin.forms.2.0.0.6482\lib\wpa81\xamarin.forms.platform.winrt.dll" HashGuid="dbd728c2-e21b-4125-2be0-f7931b605baa" />
-    <ReferenceAssembly PathName="c:\users\jjack\onedrive\documenten\github\odobenus\pxlookup\packages\xamarin.forms.2.0.0.6482\lib\wpa81\xamarin.forms.platform.winrt.phone.dll" HashGuid="f7f417b9-5b4a-9692-10d4-bb874feaa2e9" />
-    <ReferenceAssembly PathName="c:\users\jjack\onedrive\documenten\github\odobenus\pxlookup\packages\xamarin.forms.2.0.0.6482\lib\wpa81\xamarin.forms.xaml.dll" HashGuid="2828b56a-3245-7d15-6650-dfb4f30cfa91" />
+    <ReferenceAssembly PathName="c:\users\joryj\documents\github\odobenus\pxlookup\pxlookup\pxlookup\bin\debug\pxlookup.dll" HashGuid="fe7516ad-b66a-7843-24f5-b1b750e0682d" />
+    <ReferenceAssembly PathName="c:\users\joryj\documents\github\odobenus\pxlookup\packages\xamarin.forms.2.0.0.6482\lib\wpa81\xamarin.forms.core.dll" HashGuid="c8a30eb8-5ae8-352d-b94f-7c913a7557ba" />
+    <ReferenceAssembly PathName="c:\users\joryj\documents\github\odobenus\pxlookup\packages\xamarin.forms.2.0.0.6482\lib\wpa81\xamarin.forms.platform.dll" HashGuid="d9389e38-8a39-bed5-406b-7a34fe4704ea" />
+    <ReferenceAssembly PathName="c:\users\joryj\documents\github\odobenus\pxlookup\packages\xamarin.forms.2.0.0.6482\lib\wpa81\xamarin.forms.platform.winrt.dll" HashGuid="dbd728c2-e21b-4125-2be0-f7931b605baa" />
+    <ReferenceAssembly PathName="c:\users\joryj\documents\github\odobenus\pxlookup\packages\xamarin.forms.2.0.0.6482\lib\wpa81\xamarin.forms.platform.winrt.phone.dll" HashGuid="f7f417b9-5b4a-9692-10d4-bb874feaa2e9" />
+    <ReferenceAssembly PathName="c:\users\joryj\documents\github\odobenus\pxlookup\packages\xamarin.forms.2.0.0.6482\lib\wpa81\xamarin.forms.xaml.dll" HashGuid="2828b56a-3245-7d15-6650-dfb4f30cfa91" />
   </ReferenceAssemblyList>
 </XamlCompilerSaveState>

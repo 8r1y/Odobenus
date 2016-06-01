@@ -1,2 +1,2 @@
-C:\Users\jjack\OneDrive\Documenten\GitHub\Odobenus\PxLookUp\PxLookUp\PxLookUp.Windows\PxLookUp.Windows.csproj;neutral
-C:\Users\jjack\OneDrive\Documenten\GitHub\Odobenus\PxLookUp\PxLookUp\PxLookUp\PxLookUp.csproj;neutral
+C:\Users\joryj\Documents\GitHub\Odobenus\PxLookUp\PxLookUp\PxLookUp.Windows\PxLookUp.Windows.csproj;neutral
+C:\Users\joryj\Documents\GitHub\Odobenus\PxLookUp\PxLookUp\PxLookUp\PxLookUp.csproj;neutral
