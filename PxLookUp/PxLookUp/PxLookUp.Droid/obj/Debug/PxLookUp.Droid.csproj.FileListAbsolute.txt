@@ -35,5 +35,6 @@ C:\Users\jjack\OneDrive\Documenten\GitHub\Odobenus\PxLookUp\PxLookUp\PxLookUp.Dr
 C:\Users\jjack\OneDrive\Documenten\GitHub\Odobenus\PxLookUp\PxLookUp\PxLookUp.Droid\obj\Debug\res\drawable-hdpi\logo.png
 C:\Users\jjack\OneDrive\Documenten\GitHub\Odobenus\PxLookUp\PxLookUp\PxLookUp.Droid\obj\Debug\res\drawable-xhdpi\logo.png
 C:\Users\jjack\OneDrive\Documenten\GitHub\Odobenus\PxLookUp\PxLookUp\PxLookUp.Droid\obj\Debug\res\drawable-xxhdpi\logo.png
+C:\Users\jjack\OneDrive\Documenten\GitHub\Odobenus\PxLookUp\PxLookUp\PxLookUp.Droid\bin\Debug\PxLookUp.dll.mdb
 C:\Users\jjack\OneDrive\Documenten\GitHub\Odobenus\PxLookUp\PxLookUp\PxLookUp.Droid\obj\Debug\PxLookUp.Droid.dll.mdb
 C:\Users\jjack\OneDrive\Documenten\GitHub\Odobenus\PxLookUp\PxLookUp\PxLookUp.Droid\bin\Debug\PxLookUp.Droid.dll.mdb

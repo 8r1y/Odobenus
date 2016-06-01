@@ -32,50 +32,15 @@ namespace PxLookUp
                 }
             }
 
-            List<int> orderedDays = null; 
-
             if (!isEndOfMonth)
             {
-                orderedDays = days.OrderBy(i => i).ToList(); ;
+
             }
 
-            List<Course> sortedDays = new List<Course>();
-            int index = -1;
-            switch (s)
-            {
-                case "Monday":
-                    index = 0;
-                    break;
-                case "Tuesday":
-                    index = 1;
-                    break;
-                case "Wednesday":
-                    index = 2;
-                    break;
-                case "Thursday":
-                    index = 3;
-                    break;
-                case "Friday":
-                    index = 4;
-                    break;
-            }
 
-            if(index != -1)
-            {
-                foreach(var v in list)
-                {
-                    if (Convert.ToInt32(v.datum.Split('/')[0]) == (orderedDays.ElementAt(index)))
-                    {
-                        sortedDays.Add(v);
-                    }
-                }
-            }
-
-            return sortedDays;
+            return null;
 
             
         }
-
-
     }
 }
