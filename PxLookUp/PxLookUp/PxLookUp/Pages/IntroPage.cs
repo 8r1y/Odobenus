@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PxLookUp.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -38,60 +39,95 @@ namespace PxLookUp.Pages
 
                 pagePicker.SelectedIndexChanged += (sender, args) =>
                 {
-                    optionPicker.IsEnabled = true;
-
-                    if (pagePicker.Items.ElementAt(pagePicker.SelectedIndex).Equals("Course"))
+                    if(optionPicker.IsEnabled == false)
                     {
-                        optionPicker.Items.Clear();
-                        optionPicker.Items.Add("By Room");
-                        optionPicker.Items.Add("By Group");
-                        optionPicker.Items.Add("By Teacher");
+                        optionPicker.IsEnabled = true;
                     }
-                    else if (pagePicker.Items.ElementAt(pagePicker.SelectedIndex).Equals("Menu"))
+
+                    if(pagePicker.SelectedIndex != -1)
                     {
-                        optionPicker.Items.Clear();
-                        optionPicker.Items.Add("Lekker");
-                    };
+                        if (pagePicker.Items.ElementAt(pagePicker.SelectedIndex).Equals("Course"))
+                        {
+                            optionPicker.Items.Clear();
+                            optionPicker.Items.Add("By Room");
+                            optionPicker.Items.Add("By Group");
+                            optionPicker.Items.Add("By Teacher");
+                            optionPicker.SelectedIndex = 1;
+                        }
+                        else if (pagePicker.Items.ElementAt(pagePicker.SelectedIndex).Equals("Menu"))
+                        {
+                            optionPicker.Items.Clear();
+                            optionPicker.Items.Add("By Location");
+                            optionPicker.SelectedIndex = 1;
+                        };
+                    }
                 };
 
                 optionPicker.SelectedIndexChanged += (sender, args) =>
                 {
-                    filterPicker.IsEnabled = true;
-
-                    var tv = optionPicker.Items.ElementAt(optionPicker.SelectedIndex);
-
-                    var x = "";
-
-                    switch (tv)
+                    if(filterPicker.IsEnabled == false)
                     {
-                        case "By Room":
-                            x = "lokaal";
-                            break;
-                        case "By Group":
-                            x = "klas";
-                            break;
-                        case "By Teacher":
-                            x = "docent";
-                            break;
+                        filterPicker.IsEnabled = true;
                     }
 
-                    filterPicker.Items.Clear();
-
-                    foreach (var v in db.GetByColumn(x))
+                    if(optionPicker.SelectedIndex != -1)
                     {
-                        switch (optionPicker.Items.ElementAt(optionPicker.SelectedIndex))
+                        var tv = optionPicker.Items.ElementAt(optionPicker.SelectedIndex);
+
+                        var x = "";
+
+                        switch (tv)
                         {
                             case "By Room":
-                                filterPicker.Items.Add(v.lokaal);
+                                x = "lokaal";
                                 break;
                             case "By Group":
-                                filterPicker.Items.Add(v.klas);
+                                x = "klas";
                                 break;
                             case "By Teacher":
-                                filterPicker.Items.Add(v.docent);
+                                x = "docent";
+                                break;
+                            case "By Location":
+                                x = "Locatie";
                                 break;
                         }
 
+                        filterPicker.Items.Clear();
+
+                        List<TodoItem> items = new List<TodoItem>();
+
+                        if (pagePicker.Items.ElementAt(pagePicker.SelectedIndex).Equals("Course"))
+                        {
+                            items = db.GetCourseByColumn(x).ToList<TodoItem>();
+                        }
+                        else if (pagePicker.Items.ElementAt(pagePicker.SelectedIndex).Equals("Menu"))
+                        {
+                            items = db.GetMenuByColumn(x).ToList<TodoItem>();
+                        }
+
+                        foreach (var v in items)
+                        {
+                            switch (optionPicker.Items.ElementAt(optionPicker.SelectedIndex))
+                            {
+                                case "By Room":
+                                    Course c1 = (Course)v;
+                                    filterPicker.Items.Add(c1.lokaal);
+                                    break;
+                                case "By Group":
+                                    Course c2 = (Course)v;
+                                    filterPicker.Items.Add(c2.klas);
+                                    break;
+                                case "By Teacher":
+                                    Course c3 = (Course)v;
+                                    filterPicker.Items.Add(c3.docent);
+                                    break;
+                                case "By Location":
+                                    Menu menu = (Menu)v;
+                                    filterPicker.Items.Add(menu.Locatie);
+                                    break;
+
+                            }
+                        }
                     }
                 };
 
@@ -99,8 +135,15 @@ namespace PxLookUp.Pages
                 {
                     if(filterPicker.SelectedIndex != -1)
                     {
-                        Navigation.PushAsync(new RoomPage(optionPicker.Items.ElementAt(optionPicker.SelectedIndex), db, filterPicker.Items.ElementAt(filterPicker.SelectedIndex)));
-                    }                 
+                        if (pagePicker.Items.ElementAt(pagePicker.SelectedIndex).Equals("Course"))
+                        {
+                            Navigation.PushAsync(new RoomPage(optionPicker.Items.ElementAt(optionPicker.SelectedIndex), db, filterPicker.Items.ElementAt(filterPicker.SelectedIndex)));
+                        }
+                        else if (pagePicker.Items.ElementAt(pagePicker.SelectedIndex).Equals("Menu"))
+                        {
+                            Navigation.PushAsync(new CateringPage(db, filterPicker.Items.ElementAt(filterPicker.SelectedIndex)));
+                        }
+                    }
                 };
 
                 StackLayout l = new StackLayout();

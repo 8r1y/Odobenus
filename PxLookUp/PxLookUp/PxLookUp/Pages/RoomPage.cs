@@ -11,7 +11,7 @@ namespace PxLookUp.Pages
     {
         public RoomPage(string title, TodoItemDatabase db, string value)
         {
-            this.Title = title;
+            this.Title = value;
 
             List<Course> list = new List<Course>(); ;
 
@@ -21,30 +21,30 @@ namespace PxLookUp.Pages
                     list = db.GetCourseByRoom(value);
                     break;
                 case "By Group":
-                    list = db.GetCourseByRoom(value);
+                    list = db.GetCourseByGroup(value);
                     break;
                 case "By Teacher":
-                    list = db.GetCourseByRoom(value);
+                    list = db.GetCourseByTeacher(value);
                     break;
             }
 
-            this.Children.Add(new DayPage(new ContentService().FilterByDay(list, "fff"))
+            this.Children.Add(new DayPage(new ContentService().FilterCoursesByDay(list, 1))
             {
                 Title = "Monday"
             });
-            this.Children.Add(new DayPage(list)
+            this.Children.Add(new DayPage(new ContentService().FilterCoursesByDay(list, 2))
             {
                 Title = "Tuesday"
             });
-            this.Children.Add(new DayPage(list)
+            this.Children.Add(new DayPage(new ContentService().FilterCoursesByDay(list, 3))
             {
                 Title = "Wednesday"
             });
-            this.Children.Add(new DayPage(list)
+            this.Children.Add(new DayPage(new ContentService().FilterCoursesByDay(list, 4))
             {
                 Title = "Thursday"
             });
-            this.Children.Add(new DayPage(list)
+            this.Children.Add(new DayPage(new ContentService().FilterCoursesByDay(list, 5))
             {
                 Title = "Friday"
             });
@@ -54,6 +54,7 @@ namespace PxLookUp.Pages
         {
             public DayPage(List<Course> list)
             {
+
                 this.SetBinding(ContentPage.TitleProperty, "Name");
 
                 Label hourLabel;

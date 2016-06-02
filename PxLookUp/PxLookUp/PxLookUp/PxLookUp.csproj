@@ -37,15 +37,16 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="Model\Menu.cs" />
+    <Compile Include="Pages\CateringPage.cs" />
     <Compile Include="Service\ContentService.cs" />
     <Compile Include="Model\Course.cs" />
-    <Compile Include="ISQLite.cs" />
+    <Compile Include="DAL\ISQLite.cs" />
     <Compile Include="Pages\IntroPage.cs" />
     <Compile Include="Pages\RoomPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\RestService.cs" />
-    <Compile Include="TodoItem.cs" />
-    <Compile Include="TodoItemDatabase.cs" />
+    <Compile Include="DAL\TodoItem.cs" />
+    <Compile Include="DAL\TodoItemDatabase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -82,9 +83,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="GettingStarted.Xamarin" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.0.0.6482\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.0.0.6482\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,38 +10,19 @@ namespace PxLookUp
 {
     public class ContentService
     {
-        public List<Course> FilterByDay(List<Course> list, string s)
+        public List<Course> FilterCoursesByDay(List<Course> list, int dayindex)
         {
-            HashSet<int> days = new HashSet<int>();
-            HashSet<int> months = new HashSet<int>();
+            DateTime ClockInfoFromSystem = DateTime.Now;
 
-            foreach(var v in list)
-            {
-                days.Add(Convert.ToInt32(v.datum.Split('/')[0]));
-                months.Add(Convert.ToInt32(v.datum.Split('/')[1]));
-            }
+            var today = (int)ClockInfoFromSystem.DayOfWeek;
+            var date = Convert.ToInt32(ClockInfoFromSystem.Date.ToString("dd"));
 
-            bool isEndOfMonth = false;
-            bool isEndOfYear = false;
+            var searchDate = ClockInfoFromSystem.AddDays(dayindex - today);
+            var v = searchDate.Date.ToString("dd/MM/yy");
 
-            if (months.Count > 1)
-            {
-                isEndOfMonth = true;
+            List<Course> ToDayCourse = list.Where(c => c.datum.Equals(searchDate.Date.ToString("dd/MM/yy"))).ToList<Course>();
 
-                if (Math.Abs((months.ElementAt(0) - months.ElementAt(1))) > 1){
-                    isEndOfYear = true;
-                }
-            }
-
-            if (!isEndOfMonth)
-            {
-
-            }
-
-
-            return null;
-
-            
+            return ToDayCourse;    
         }
     }
 }

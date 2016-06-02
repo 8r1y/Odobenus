@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using PxLookUp.Model;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -17,6 +18,7 @@ namespace PxLookUp
         {
             database = DependencyService.Get<ISQLite>().GetConnection();
             database.CreateTable<Course>();
+            database.CreateTable<Menu>();
         }
 
         public IEnumerable<Course> GetCourses()
@@ -27,20 +29,32 @@ namespace PxLookUp
         {
             return database.Query<Course>("SELECT * FROM Course WHERE lokaal = '" + room + "'"); 
         }
-        public Course GetCourseByGroup(string group)
+        public List<Course> GetCourseByGroup(string group)
         {
-            return database.Table<Course>().FirstOrDefault(x => x.klas == group);
+            return database.Query<Course>("SELECT * FROM Course WHERE klas = '" + group + "'");
         }
-        public Course GetCourseByTeacher(string teacher)
+        public List<Course> GetCourseByTeacher(string teacher)
         {
-            return database.Table<Course>().FirstOrDefault(x => x.docent == teacher);
+            return database.Query<Course>("SELECT * FROM Course WHERE docent = '" + teacher + "'");
         }
+        public List<Menu> GetMenusByLocation(string location)
+        {
+            return database.Query<Menu>("SELECT * FROM Menu WHERE Locatie = '" + location + "'");
+        }
+
         public void InsertCourses(List<Course> courses)
         {
             foreach(var v in courses)
             {
                 database.Insert(v);
             }     
+        }
+        public void InsertMenus(List<Menu> menus)
+        {
+            foreach (var v in menus)
+            {
+                database.Insert(v);
+            }
         }
         public void DeleteCourses()
         {
@@ -51,12 +65,19 @@ namespace PxLookUp
             //var count = (from v in database.Table<Course>().AsEnumerable() select v).Count();
 
             DeleteCourses();
-            InsertCourses(new RestService().RefreshDataAsync().Result);
+            InsertCourses(new RestService().GetCoursesAsync().Result);
+            InsertMenus(new RestService().GetMenusAsync().Result);
         }
 
-        public List<Course> GetByColumn(string column)
+        public List<Course> GetCourseByColumn(string column)
         {
-            var d = database.Query<Course>("SELECT DISTINCT " + column +  " FROM Course");
+            var d = database.Query<Course>("SELECT DISTINCT " + column + " FROM Course");
+            return d;
+        }
+
+        public List<Menu> GetMenuByColumn(string column)
+        {
+            var d = database.Query<Menu>("SELECT DISTINCT " + column + " FROM Menu");
             return d;
         }
     }
